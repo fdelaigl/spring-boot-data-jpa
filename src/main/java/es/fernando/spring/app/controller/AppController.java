@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.fernando.spring.app.dao.ClienteDao;
 import es.fernando.spring.app.entity.Cliente;
+import es.fernando.spring.app.service.ClienteService;
 
 /**
  * The Class AppController.
@@ -24,7 +24,7 @@ public class AppController {
 
 	/** The dao. */
 	@Autowired
-	private ClienteDao dao;
+	private ClienteService service;
 
 	/**
 	 * Listar.
@@ -34,7 +34,7 @@ public class AppController {
 	 */
 	@GetMapping("/listar")
 	public String listar(Model model) {
-		model.addAttribute("clientes", dao.findAll());
+		model.addAttribute("clientes", service.findAll());
 		return "listar";
 	}
 
@@ -55,27 +55,51 @@ public class AppController {
 	 * Guardar.
 	 *
 	 * @param cliente the cliente
+	 * @param result the result
 	 * @return the string
 	 */
-	@PostMapping(value="/form")
+	@PostMapping(value = "/form")
 	public String guardar(@Valid Cliente cliente, BindingResult result) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "form";
 		}
-		dao.save(cliente);
-		return "redirect:listar";
+		service.save(cliente);
+		return "redirect:/listar";
 	}
-	
+
+	/**
+	 * Form.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/form/{id}")
-	public String form(@PathVariable(value="id") Long id , Map<String, Object> model) {
+	public String form(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		Cliente cliente = null;
-		
-		if(id>0) {
-			cliente = dao.findOne(id);
-		}else {
+
+		if (id > 0) {
+			cliente = service.findOne(id);
+		} else {
 			return "redirect:listar";
 		}
 		model.put("cliente", cliente);
 		return "form";
+	}
+
+	/**
+	 * Eliminar.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the string
+	 */
+	@RequestMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable(value = "id") Long id, Map<String, Object> model) {
+		if (id > 0) {
+			service.delete(id);
+		}
+		return "redirect:/listar";
+
 	}
 }
