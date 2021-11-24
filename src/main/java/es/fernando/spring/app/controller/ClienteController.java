@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.fernando.spring.app.entity.Cliente;
@@ -37,7 +38,7 @@ import es.fernando.spring.app.service.ClienteService;
  */
 @Controller
 @SessionAttributes("cliente")
-public class AppController {
+public class ClienteController {
 
 	/** The dao. */
 	@Autowired
@@ -107,7 +108,7 @@ public class AppController {
 	 * @return the string
 	 */
 	@PostMapping(value = "/form")
-	public String guardar(@Valid Cliente cliente, BindingResult result, @RequestParam("file") MultipartFile foto) {
+	public String guardar(@Valid Cliente cliente, BindingResult result, @RequestParam("file") MultipartFile foto, SessionStatus status) {
 		if (result.hasErrors()) {
 			return "form";
 		}
@@ -138,6 +139,7 @@ public class AppController {
 		}
 		
 		service.save(cliente);
+		status.setComplete();
 		return "redirect:/listar";
 	}
 

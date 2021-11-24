@@ -28,6 +28,7 @@
 						aria-current="page" th:href="@{/form}">Crear clientes</a></li>
 					</li>
 
+
 				</ul>
 			</div>
 		</div>
@@ -43,13 +44,15 @@
 					<th>Creado el</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
+					<th>Crear Factura</th>
 				</tr>
 
 			</thead>
 			<tbody>
-				<tr th:each="cliente: ${clientes}"> 
+				<tr th:each="cliente: ${clientes}">
 					<td th:text="${cliente.id}"></td>
-					<td><a th:href="@{/ver/} +${cliente.id}" th:text="${cliente.nombre}"></a> </td>
+					<td><a th:href="@{/ver/} +${cliente.id}"
+						th:text="${cliente.nombre}"></a></td>
 					<td th:text="${cliente.email}"></td>
 					<td th:text="${cliente.createAt}"></td>
 					<td><a class="btn btn-primary btn-xs"
@@ -57,6 +60,9 @@
 					<td><a class="btn btn-danger btn-xs"
 						th:href="@{/eliminar/} + ${cliente.id}" th:text="'Eliminar'"
 						onclick="return confirm('¿Estás seguro?')"></a></td>
+					<td><a class="btn btn-success btn-xs"
+						th:href="@{/factura/form/} + ${cliente.id}" th:text="'Crear factura'"
+						></a></td>
 
 				</tr>
 			</tbody>

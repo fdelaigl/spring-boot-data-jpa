@@ -1,13 +1,18 @@
 package es.fernando.spring.app.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -24,7 +29,6 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "clientes")
 public class Cliente implements Serializable {
 
-
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -32,25 +36,36 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	/** The nombre. */
 	@NotEmpty
 	private String nombre;
-	
+
 	/** The email. */
 	@NotEmpty
 	@Email
 	private String email;
-	
+
 	/** The create at. */
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
-	
+
 	/** The foto. */
 	@Column(name = "foto")
 	private String foto;
-	
+
+	/** The facturas. */
+	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
+	private List<Factura> facturas;
+
+	/**
+	 * Instantiates a new cliente.
+	 */
+	public Cliente() {
+		facturas = new ArrayList<Factura>();
+	}
+
 	/**
 	 * Pre persist.
 	 */
@@ -149,7 +164,32 @@ public class Cliente implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
-	
+
+	/**
+	 * Gets the facturas.
+	 *
+	 * @return the facturas
+	 */
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	/**
+	 * Sets the facturas.
+	 *
+	 * @param facturas the new facturas
+	 */
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
+
+	/**
+	 * Adds the factura.
+	 *
+	 * @param factura the factura
+	 */
+	public void addFactura(Factura factura) {
+		facturas.add(factura);
+	}
 
 }
