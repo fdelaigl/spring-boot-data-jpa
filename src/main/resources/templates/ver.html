@@ -32,26 +32,14 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
-		<form th:action="@{/form}" th:object="${cliente}" method="post"
-			class="form" enctype="multipart/form-data">
+	<div class="container" style="margin-top:10px">
+		<img th:if="${#strings.length(cliente.foto) > 0}" alt="${cliente.nombre}" style="max-width:150px; float:left" th:src="@{'/uploads/' + ${cliente.foto}}"
+			class="img-thumnail float-left">
+		<ul class="list-group">
+		<li class="list-group-item" th:text="${cliente.nombre}">
+		<li class="list-group-item" th:text="${cliente.email}">
+		</ul>
 
-			<label class="col-form-label">Nombre</label> <input type="text"
-				th:field="*{nombre}" class="form-control" /> <small
-				class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
-				th:errors="*{nombre}"></small>
-			<hr>
-			<label class="col-form-label"> Email</label> <input type="email"
-				th:field="*{email}" class="form-control" /> <small
-				class="form-text text-danger" th:if="${#fields.hasErrors('email')}"
-				th:errors="*{email}"></small>
-			<hr>
-			<label class="col-form-label"> Foto</label> <input type="file"
-				 class="form-control" name="file"/>
-			<hr>
-			<input type="submit" value="Crear cliente" class="btn btn-primary">
-			<input type="hidden" th:field="*{id}" />
-		</form>
 	</div>
 </body>
 </html>

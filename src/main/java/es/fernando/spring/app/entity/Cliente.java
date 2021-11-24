@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Cliente.
  */
@@ -45,6 +46,10 @@ public class Cliente implements Serializable {
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
+	
+	/** The foto. */
+	@Column(name = "foto")
+	private String foto;
 	
 	/**
 	 * Pre persist.
@@ -126,5 +131,25 @@ public class Cliente implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	/**
+	 * Gets the foto.
+	 *
+	 * @return the foto
+	 */
+	public String getFoto() {
+		return foto;
+	}
+
+	/**
+	 * Sets the foto.
+	 *
+	 * @param foto the new foto
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	
 
 }
