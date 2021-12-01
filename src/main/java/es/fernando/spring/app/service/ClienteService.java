@@ -3,6 +3,7 @@ package es.fernando.spring.app.service;
 import java.util.List;
 
 import es.fernando.spring.app.entity.Cliente;
+import es.fernando.spring.app.entity.Producto;
 
 /**
  * The Interface ClienteService.
@@ -37,4 +38,6 @@ public interface ClienteService {
 	 * @param id the id
 	 */
 	public void delete(Long id);
+	
+	public List<Producto> findByNombre(String term);
 }

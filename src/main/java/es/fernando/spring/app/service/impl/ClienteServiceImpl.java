@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.fernando.spring.app.dao.ClienteDao;
+import es.fernando.spring.app.dao.ProductoDao;
 import es.fernando.spring.app.entity.Cliente;
+import es.fernando.spring.app.entity.Producto;
 import es.fernando.spring.app.service.ClienteService;
 
 /**
@@ -19,6 +21,9 @@ public class ClienteServiceImpl implements ClienteService {
 	/** The cliente dao. */
 	@Autowired
 	private ClienteDao clienteDao;
+	
+	@Autowired
+	private ProductoDao productoDao;
 
 	/**
 	 * Find all.
@@ -66,5 +71,9 @@ public class ClienteServiceImpl implements ClienteService {
 		clienteDao.deleteById(id);
 
 	}
-
+	@Override
+	@Transactional(readOnly = true)
+	public List<Producto> findByNombre(String term) {
+		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
+	}
 }
