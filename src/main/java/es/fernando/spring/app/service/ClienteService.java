@@ -3,6 +3,7 @@ package es.fernando.spring.app.service;
 import java.util.List;
 
 import es.fernando.spring.app.entity.Cliente;
+import es.fernando.spring.app.entity.Factura;
 import es.fernando.spring.app.entity.Producto;
 
 /**
@@ -39,5 +40,14 @@ public interface ClienteService {
 	 */
 	public void delete(Long id);
 	
+	
 	public List<Producto> findByNombre(String term);
+	
+	public void saveFactura(Factura factura);
+	
+	public Producto findProductoById(Long id);
+	
+	public Factura findFacturaById(Long id);
+	
+	public void deleteFactura(Long id);
 }
