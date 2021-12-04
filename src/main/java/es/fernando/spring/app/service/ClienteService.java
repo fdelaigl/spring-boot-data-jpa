@@ -50,4 +50,8 @@ public interface ClienteService {
 	public Factura findFacturaById(Long id);
 	
 	public void deleteFactura(Long id);
+	
+	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id);
+	
+	public Cliente fetchByIdWithFacturas(Long id);
 }

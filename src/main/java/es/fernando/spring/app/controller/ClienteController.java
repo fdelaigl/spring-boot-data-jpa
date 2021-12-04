@@ -52,7 +52,7 @@ public class ClienteController {
 	 * @param model the model
 	 * @return the string
 	 */
-	@GetMapping("/listar")
+	@GetMapping(value={"/listar","/"})
 	public String listar(Model model) {
 		model.addAttribute("clientes", service.findAll());
 		return "listar";
@@ -73,7 +73,7 @@ public class ClienteController {
 	
 	@GetMapping("/ver//{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model) {
-		Cliente cliente = service.findOne(id);
+		Cliente cliente = service.fetchByIdWithFacturas(id);//service.findOne(id);
 		if(cliente == null) {
 			return "redirect:/listar";
 		}
