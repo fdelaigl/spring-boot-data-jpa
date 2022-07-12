@@ -30,3 +30,10 @@ INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 1, 4);
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 5);
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 7);
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
+
+INSERT INTO users (username, password, enabled) VALUES('fer', '$2a$10$12TshzBgxom6cakh5O44dONGaCZoRIDwA6G.79BkluvvUE6AOEHOe', 1);
+INSERT INTO users (username, password, enabled) VALUES('admin', '$2a$10$tQheiPVY7JCPjRmaOHIBXuhMzLCvoAEc89Q2nrpbNtZuPLYsxt0Qe', 1);
+
+INSERT INTO authorities (user_id, authority) VALUES(1, 'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES(2, 'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES(2, 'ROLE_ADMIN');
