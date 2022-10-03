@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="layout/layout :: head"></head>
+
 <body>
 
 	<header th:replace="layout/layout :: header"></header>
@@ -13,6 +15,7 @@
 
 				<h4 class="card-title">
 					<a th:href="@{/form}" class="btn btn-primary">Crear cliente</a>
+					<a th:href="@{'/listar'(format=csv)}" class="btn btn-success btn-xs float-right">Exportar a CSV</a>
 				</h4>
 
 				<table class="table table-striped">
@@ -28,17 +31,16 @@
 					</thead>
 					<tbody>
 						<tr th:each="cliente: ${clientes}">
-							<td> <a th:href="@{/ver/} + ${cliente.id}"  th:text="${cliente.nombre}"></a></td>
+							<td> <a th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.nombre}"></a></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.createAt}"></td>
-							<td><a class="btn btn-success btn-sm"
-								th:href="@{'/factura/form/' + ${cliente.id}}"
-								th:text="'Crear factura'"></a></td>
-							<td><a class="btn btn-primary btn-sm"
-								th:href="@{/form/} + ${cliente.id}" th:text="'Editar'"></a></td>
-							<td><a class="btn btn-danger btn-sm"
-								th:href="@{/eliminar/} + ${cliente.id}" th:text="'Eliminar'"
-								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
+							<td><a class="btn btn-success btn-sm" th:href="@{'/factura/form/' + ${cliente.id}}"
+									th:text="'Crear factura'"></a></td>
+							<td><a class="btn btn-primary btn-sm" th:href="@{/form/} + ${cliente.id}"
+									th:text="'Editar'"></a></td>
+							<td><a class="btn btn-danger btn-sm" th:href="@{/eliminar/} + ${cliente.id}"
+									th:text="'Eliminar'"
+									onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
 						</tr>
 					</tbody>
 
@@ -50,4 +52,5 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
+
 </html>
