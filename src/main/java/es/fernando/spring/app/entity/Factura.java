@@ -19,6 +19,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The Class Factura.
@@ -47,6 +51,7 @@ public class Factura implements Serializable {
 	private Date createAt;
 
 	/** The cliente. */
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Cliente cliente;
 
@@ -61,6 +66,7 @@ public class Factura implements Serializable {
 	/**
 	 * Pre persist.
 	 */
+	
 	@PrePersist
 	public void prePersist() {
 		createAt = new Date();
@@ -143,6 +149,8 @@ public class Factura implements Serializable {
 	 *
 	 * @return the cliente
 	 */
+
+	@XmlTransient
 	public Cliente getCliente() {
 		return cliente;
 	}

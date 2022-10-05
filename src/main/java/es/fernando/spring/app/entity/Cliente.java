@@ -21,6 +21,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Cliente.
@@ -48,6 +51,7 @@ public class Cliente implements Serializable {
 
 	/** The create at. */
 	@Column(name = "create_at")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 
@@ -56,6 +60,7 @@ public class Cliente implements Serializable {
 	private String foto;
 
 	/** The facturas. */
+	@JsonManagedReference
 	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<Factura> facturas;
 

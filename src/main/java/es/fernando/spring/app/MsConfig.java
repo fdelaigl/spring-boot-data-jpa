@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -42,5 +43,10 @@ public class MsConfig  implements WebMvcConfigurer{
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 	
-	
+	@Bean
+	public Jaxb2Marshaller jaxb2marshaller() {
+		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+		marshaller.setClassesToBeBound(new Class[] {es.fernando.spring.app.xml.ClienteList.class});
+		return marshaller;
+	}
 }

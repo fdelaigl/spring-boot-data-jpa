@@ -16,6 +16,8 @@
 				<h4 class="card-title">
 					<a th:href="@{/form}" class="btn btn-primary">Crear cliente</a>
 					<a th:href="@{'/listar'(format=csv)}" class="btn btn-success btn-xs float-right">Exportar a CSV</a>
+					<a th:href="@{'/listar'(format=xml)}" class="btn btn-success mx-2 btn-xs float-right">Exportar a XML</a>
+					<a th:href="@{'/listar'(format=json)}" class="btn btn-success mx-2 btn-xs float-right">Exportar a JSON</a>
 				</h4>
 
 				<table class="table table-striped">
